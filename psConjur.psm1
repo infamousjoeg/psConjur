@@ -73,7 +73,7 @@ function Get-ConjurAuthToken {
     param (
         [string]$ServiceID,
         [string]$JWTToken,
-        [string]$Username,
+        [string]$WorkloadId,
         [string]$ApiKey
     )
 
@@ -86,23 +86,25 @@ function Get-ConjurAuthToken {
 
     try {
         if ($ServiceID -and $JWTToken) {
-            $AuthHeader = "Token token=`"$JWTToken`""
             $uri = "$ApplianceUrl/authn-jwt/$ServiceID/$Account/authenticate"
             $headers = @{
-                "Authorization" = $AuthHeader
+                "Accept-Encoding" = "base64"
             }
-            $response = Invoke-RestMethod -Uri $uri -Headers $headers -Method Post
-        } elseif ($Username -and $ApiKey) {
-            $uri = "$ApplianceUrl/authn/$Account/$Username/authenticate"
-            $response = Invoke-RestMethod -Uri $uri -Body $ApiKey -Method Post -ContentType "text/plain"
+            $response = Invoke-RestMethod -Uri $uri -Body "jwt=$JWTToken" -Headers $headers -Method Post -ContentType "application/x-www-form-urlencoded"
+        } elseif ($WorkloadId -and $ApiKey) {
+            $encodedWorkloadId = [System.Web.HttpUtility]::UrlEncode($WorkloadId)
+            $uri = "$ApplianceUrl/authn/$Account/$encodedWorkloadId/authenticate"
+            $headers = @{
+                "Accept-Encoding" = "base64"
+            }
+            $response = Invoke-RestMethod -Uri $uri -Body $ApiKey -Headers $headers -Method Post -ContentType "text/plain"
         } else {
-            throw "Provide either ServiceID and JWTToken for JWT authentication or Username and ApiKey for username+apikey authentication."
+            throw "Provide either ServiceID and JWTToken for JWT authentication or WorkloadID and ApiKey for WorkloadID+apikey authentication."
         }
 
         # Update the session's AuthToken and reset expiry
         $script:ConjurSession['AuthToken'] = $response
         $script:ConjurSession['ExpiryTime'] = (Get-Date).AddMinutes(30) # Reset expiry to default 30 minutes
-        return $response
     } catch {
         throw "Authentication failed: $_"
     }
@@ -167,4 +169,4 @@ function Get-ConjurSecretsBulk {
 }
 
 # Export functions
-Export-ModuleMember -Function Initialize-ConjurSession, Clear-ConjurSession, Get-ConjurAuthToken, Get-ConjurSecret, Get-ConjurSecretsBulk
+Export-ModuleMember -Function Initialize-ConjurSession, Clear-ConjurSession, Test-ConjurSession, Get-ConjurAuthToken, Get-ConjurSecret, Get-ConjurSecretsBulk

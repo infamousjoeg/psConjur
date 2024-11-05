@@ -44,10 +44,10 @@ Use the `Get-ConjurAuthToken` function to authenticate and obtain an access toke
 $authToken = Get-ConjurAuthToken -ServiceID "your-service-id" -JWTToken "your-jwt-token"
 ```
 
-#### Username + API Key Authentication
+#### WorkloadID + API Key Authentication
 
 ```powershell
-$authToken = Get-ConjurAuthToken -Username "your-username" -ApiKey "your-api-key"
+$authToken = Get-ConjurAuthToken -WorkloadID "your-WorkloadID" -ApiKey "your-api-key"
 ```
 
 The retrieved `AuthToken` will automatically update the session and reset the expiration time.
