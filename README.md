@@ -82,18 +82,13 @@ Clear-ConjurSession
 
 Using a session-based approach for storing authentication and connection information introduces security implications. Here are key considerations and recommendations:
 
-	1. **Session Persistence**: Sensitive data, including the `AuthToken`, remains in memory during the session. This provides convenience but poses a risk if the PowerShell session remains open and unattended.
-	- **Recommendation**: Always clear the session manually with `Clear-ConjurSession` when done, and avoid using this module in long-running, unattended sessions.
-	2. **Session Expiration**: Sessions expire after a set time (default is 30 minutes) to prevent indefinite access with stale tokens.
-	- **Recommendation**: Set an appropriate expiration time based on your security needs using `ExpiryMinutes` in `Initialize-ConjurSession`.
-	3. **Unauthorized Access**: If another user gains access to the PowerShell session, they could potentially access stored tokens.
-	- **Recommendation**: Limit access to the system, and use PowerShell’s ConstrainedLanguage mode to restrict unauthorized users in shared environments.
-	4. **Memory Exposure**: Sensitive session data stored in memory could be accessed if the host is compromised.
-	- **Recommendation**: Secure the host machine and consider automatic session clearing or periodic re-authentication in high-security environments.
-	5. **Audit Logging**: This module does not log actions by default, which may complicate auditing.
-	- **Recommendation**: Enable custom logging for critical actions as needed, depending on your organization’s audit requirements.
-
-By following these best practices, you can securely leverage the session-based functionality in `psConjur` for efficient Conjur API access.
+|Implication|Description|Recommendation|
+|---|---|---|
+|**Session Persistence**|Sensitive data, including the `AuthToken`, remains in memory during the session. This provides convenience but poses a risk if the PowerShell session remains open and unattended.|Always clear the session manually with `Clear-ConjurSession` when done, and avoid using this module in long-running, unattended sessions.|
+|**Session Expiration**|Sessions expire after a set time (default is 30 minutes) to prevent indefinite access with stale tokens.|Set an appropriate expiration time based on your security needs using `ExpiryMinutes` in `Initialize-ConjurSession`.|
+|Unauthorized Access|If another user gains access to the PowerShell session, they could potentially access stored tokens.|Limit access to the system, and use PowerShell’s ConstrainedLanguage mode to restrict unauthorized users in shared environments.|
+|Memory Exposure|Sensitive session data stored in memory could be accessed if the host is compromised.|Secure the host machine and consider automatic session clearing or periodic re-authentication in high-security environments.|
+|Audit Logging|This module does not log actions by default, which may complicate auditing.|Enable custom logging for critical actions as needed, depending on your organization’s audit requirements.|
 
 ## Contributing
 
