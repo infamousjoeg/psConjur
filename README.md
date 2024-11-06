@@ -1,8 +1,25 @@
-# psConjur
+# psConjur <!-- omit from toc -->
 
 ![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/psConjur) ![Downloads](https://img.shields.io/powershellgallery/dt/psConjur) ![License](https://img.shields.io/github/license/infamousjoeg/psConjur)
 
 `psConjur` is a PowerShell module for authenticating to and retrieving secrets from Conjur’s REST API. It supports session-based authentication to streamline repeated requests.
+
+- [Installation](#installation)
+  - [From PowerShell Gallery](#from-powershell-gallery)
+  - [Manual Installation](#manual-installation)
+- [Usage](#usage)
+  - [Initialize a Conjur Session](#initialize-a-conjur-session)
+  - [Authentication](#authentication)
+    - [JWT Authentication](#jwt-authentication)
+    - [WorkloadID + API Key Authentication](#workloadid--api-key-authentication)
+  - [Retrieve a Secret](#retrieve-a-secret)
+  - [Retrieve Multiple Secrets in Bulk](#retrieve-multiple-secrets-in-bulk)
+  - [Clear the Conjur Session](#clear-the-conjur-session)
+- [Security](#security)
+  - [Security Implications and Recommendations](#security-implications-and-recommendations)
+- [Contributing](#contributing)
+- [License](#license)
+
 
 ## Installation
 
