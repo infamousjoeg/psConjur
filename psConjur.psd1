@@ -1,6 +1,6 @@
 @{
     # Module metadata
-    ModuleVersion = '1.0.0'
+    ModuleVersion = '1.1.0'
     GUID = '6b2ed520-42df-4f2b-8159-4f053a069aa5'
     Author = 'Joe Garcia'
     CompanyName = 'CyberArk'
