@@ -12,7 +12,7 @@
     
     # Functions to export
     FunctionsToExport = @(
-        'Initialize-ConjurSession',
+        'Connect-Conjur',
         'Get-ConjurAuthToken',
         'Get-ConjurSecret',
         'Clear-ConjurSession',

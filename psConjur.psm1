@@ -19,4 +19,4 @@ Get-ChildItem -Path (Join-Path $moduleDir 'Functions') -Filter *.ps1 | ForEach-O
 }
 
 # Export functions
-Export-ModuleMember -Function Initialize-ConjurSession, Clear-ConjurSession, Test-ConjurSession, Get-ConjurAuthToken, Get-ConjurSecret, Get-ConjurSecretsBulk
+Export-ModuleMember -Function Connect-Conjur, Clear-ConjurSession, Test-ConjurSession, Get-ConjurAuthToken, Get-ConjurSecret, Get-ConjurSecretsBulk
